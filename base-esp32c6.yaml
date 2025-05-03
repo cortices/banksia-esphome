@@ -1,0 +1,34 @@
+defaults:
+  loglevel: INFO
+
+# Required to fix ADC on ESP32-C6 with current ESP-IDF v5.3.1
+external_components:
+  - source: github://pr#7942
+    components: [ "adc" ]
+
+esphome:
+  name: $deviceId
+  friendly_name: $deviceName
+
+esp32:
+  board: esp32-c6-devkitc-1   # Actually Waveshare ESP32-C6-Zero board
+  variant: esp32c6
+  flash_size: 4MB
+  framework:
+    version: "5.3.1" 
+    platform_version: "6.9.0" 
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: $loglevel 
+  hardware_uart: uart0
+
+# Putting this in the base file because it's special-cased for ESP-IDF, and it's used by
+# many different modules.
+i2c:
+  scl: GPIO0
+  sda: GPIO1
+  #frequency: 50kHz
+  #timeout: 10ms
+  scan: false   # scan true = crashes on ESP_IDF v5.2 and newer due to I2C library version funkiness https://github.com/esphome/esphome/discussions/6957

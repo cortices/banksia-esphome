@@ -1,0 +1,44 @@
+# Temperature And Humidity
+# BME680
+
+# A bunch of fudging of temp+humidity has to be done because these sensors are super offset.
+# If I was doing it properly, I'd actually get one set with a calibrated sensor for a while.
+sensor:
+  - platform: bme680
+    temperature:
+      name: "Temperature"
+      oversampling: 16x
+      id: temperature
+      filters:
+        - offset: -5.8
+    pressure:
+      name: "Pressure"
+      id: pressure
+    humidity:
+      name: "Humidity"
+      id: humidity
+      filters:
+      # Based on a linear regression analysis from comparison with airqual humidity, might not be 100% correct.
+        - offset: -6.17
+        #- multiply: 1.29
+        - multiply: 1.4
+
+    gas_resistance:
+      name: "Gas Resistance"
+      id: gas_resistance
+
+    address: 0x77
+    update_interval: 60s
+    # Uncommenting this line disables the heater, confusingly.
+    # But if it's disabled, the gas test becomes useless, and the temp+humidity
+    # don't seem to actually get any more accurate.
+    # heater: #disabled
+
+  - platform: template
+    name: "Indoor Air Quality"
+    id: iaq
+    icon: "mdi:gauge"
+    # calculation: comp_gas = log(R_gas[ohm]) + 0.04 log(Ohm)/%rh * hum[%rh]
+    lambda: |-
+      return log(id(gas_resistance).state) + 0.04 *  id(humidity).state;
+    state_class: "measurement"

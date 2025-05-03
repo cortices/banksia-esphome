@@ -1,0 +1,43 @@
+# Buttons ADC for 4 or 6 button system
+
+packages:
+  button1: !include
+    file: button-template.yaml
+    vars: 
+      n: 1
+      adc_v: 1.63
+  button2: !include
+    file: button-template.yaml
+    vars: 
+      n: 2
+      adc_v: 2.17
+  button3: !include
+    file: button-template.yaml
+    vars: 
+      n: 3
+      adc_v: 1.10
+  button4: !include
+    file: button-template.yaml
+    vars: 
+      n: 4
+      adc_v: 1.40
+  button5: !include
+    file: button-template.yaml
+    vars: 
+      n: 5
+      adc_v: 2.33
+  button6: !include
+    file: button-template.yaml
+    vars: 
+      n: 6
+      adc_v: 2.72
+
+sensor:
+  - platform: adc
+    pin: GPIO5
+    id: button_adc
+    attenuation: 12db
+    internal: true
+    # Unfortunately it's not possible to suppress this from debug logging! 
+    #update_interval: 0.1s
+    update_interval: 0.05s

@@ -1,0 +1,65 @@
+# Radar distance sensor
+# LD2420
+# The LD2420 has 16 sense gates 0-15 and each gate detects 0.7 meters 15th gate = 9m
+
+uart:
+  id: ld2420_uart
+  rx_pin: GPIO2
+  tx_pin: GPIO3
+  baud_rate: 115200
+  parity: NONE
+  stop_bits: 1
+
+ld2420:
+  uart_id: ld2420_uart
+
+select:
+  - platform: ld2420
+    operating_mode:
+      name: Operating Mode
+
+number:
+  - platform: ld2420
+    presence_timeout:
+      name: Detection Presence Timeout
+    min_gate_distance:
+      name: Detection Gate Minimum
+    max_gate_distance:
+      name: Detection Gate Maximum
+    gate_select:
+      name: Select Gate to Set
+    still_threshold:
+      name: Set Still Threshold Value
+    move_threshold:
+      name: Set Move Threshold Value
+    gate_move_sensitivity:
+      name: Move Calibration Sensitivity Factor
+    gate_still_sensitivity:
+      name: Still Calibration Sensitivity Factor
+button:
+  - platform: ld2420
+    apply_config:
+      name: Apply Config
+    factory_reset:
+      name: Factory Reset
+    restart_module:
+      name: Restart Module
+    revert_config:
+      name: Undo Edits
+
+sensor:
+# Radar distance sensor
+# LD2420
+  - platform: ld2420
+    moving_distance:
+      name : Moving Distance
+
+binary_sensor:
+  - platform: ld2420
+    has_target:
+      name: Presence
+
+text_sensor:
+  - platform: ld2420
+    fw_version:
+      name: LD2420 Firmware

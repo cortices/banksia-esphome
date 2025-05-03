@@ -1,0 +1,79 @@
+substitutions:
+  short_ms_max: 500ms
+  medium_ms_max: 5s
+  long_ms_max: 10s
+  release_ms_min: 200ms
+
+binary_sensor:
+  - platform: template
+    #name: "Button $n"
+    id: button${n}
+    internal: true
+    on_press:
+      - event.trigger:
+          id: button${n}_t
+          event_type: press
+    on_release:
+      - event.trigger:
+          id: button${n}_t
+          event_type: release
+    on_multi_click:
+      - timing:
+        - ON for at most $short_ms_max
+        - OFF for at least $release_ms_min
+        then:
+        - event.trigger:
+            id: button${n}_t
+            event_type: click_short
+        - logger.log: "Button $n short click"
+      - timing:
+        - ON for $short_ms_max to $medium_ms_max
+        - OFF for at least $release_ms_min
+        then:
+        - event.trigger:
+            id: button${n}_t
+            event_type: click_medium
+        - logger.log: "Button $n medium click"
+      - timing:
+        - ON for $medium_ms_max to $long_ms_max
+        #- OFF for at least $release_ms_min
+        then:
+        - event.trigger:
+            id: button${n}_t
+            event_type: click_long
+        - logger.log: "Button $n long click"
+      - timing:
+        - ON for at most $short_ms_max
+        - OFF for at most $release_ms_min
+        - ON for at most $short_ms_max
+        - OFF for at least $release_ms_min
+        then:
+        - event.trigger:
+            id: button${n}_t
+            event_type: click_double
+        - logger.log: "Button $n double click"
+
+
+
+
+event:
+  - platform: template
+    name: "Button $n Trigger"
+    id: button${n}_t
+    device_class: button
+    event_types:
+      - press
+      - release
+      - click_short
+      - click_medium
+      - click_long
+      - click_double
+      - repeat
+
+sensor:
+  - id: !extend button_adc
+    on_value:
+      - binary_sensor.template.publish:
+          id: button${n}
+          state: !lambda 'return (x > ($adc_v-0.05) && x < ($adc_v+0.05));'
+

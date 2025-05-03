@@ -1,0 +1,15 @@
+light:
+  - platform: esp32_rmt_led_strip
+    rgb_order: RGB
+    pin: GPIO8
+    num_leds: 1
+    chipset: ws2812
+    rmt_symbols: 48
+    name: "Indicator RGB"
+  - platform: esp32_rmt_led_strip
+    rgb_order: GRB
+    pin: GPIO22
+    num_leds: 6
+    chipset: ws2812
+    rmt_symbols: 48
+    name: "Button Backlight"

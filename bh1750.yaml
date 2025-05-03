@@ -1,0 +1,6 @@
+# Illuminance Sensor
+sensor:
+  - platform: bh1750
+    name: "$deviceName Illuminance"
+    address: 0x23
+    update_interval: 60s

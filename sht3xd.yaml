@@ -1,0 +1,13 @@
+# SHT31-D Temperature & Humidity sensor (I2C)
+# This series have an issue where they aren't set up properly when rebooting without a power cycle it seems.
+# So best to unplug/replug after OTA/USB firmware update!
+sensor:
+  - platform: sht3xd
+    temperature:
+      name: "Temperature"
+      id: temperature
+    humidity:
+      name: "Humidity"
+      id: humidity
+    address: 0x44
+    update_interval: 60s
