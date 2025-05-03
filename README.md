@@ -13,20 +13,22 @@ substitutions:
   deviceId: banksia-livingroom
 
 packages:
-  # This is how I set up my network parameters -- otherwise you can add them right in this file
+# This is how I import my network settings, but you could also add it directly to the file.
   wifi: !include _wifi.yaml
   
-  # The base config has the main juicy bits!
-  base: !include banksia/base-esp32c6.yaml
-  
-  # Buttons and button backlighting
-  buttons: !include banksia/buttons.yaml
-  backlight: !include banksia/backlight.yaml
-  
-  # Sensors galore! Some have multiple variations, check the folder for which are available.
-  radar: !include banksia/ld2420.yaml
-  #illuminance: !include banksia/bh1750.yaml
-  temphum: !include banksia/sht3xd.yaml
-  airqual: !include banksia/sgp30.yaml
+  banksia:
+    url: https://github.com/cortices/banksia-esphome
+    files:
+# Base processor version
+      - base-esp32c6.yaml
+# Buttons and Display
+      - buttons.yaml
+      - backlight.yaml
+# Sensors Equipped
+      - ld2420.yaml
+      - bh1750.yaml
+      - sht3xd.yaml
+      - sgp30.yaml
+
 ````
 
