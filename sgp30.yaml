@@ -3,7 +3,7 @@ sensor:
   - platform: sgp30
     eco2:
       name: "$deviceName eCO2"
-      id: eco2
+      id: co2
       accuracy_decimals: 1
     tvoc:
       name: "$deviceName TVOC"
