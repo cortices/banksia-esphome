@@ -32,3 +32,29 @@ packages:
 
 ````
 
+### Example 2: 4-button, e-paper display, BME680 temp/humidity/pressure.
+
+````yaml
+substitutions:
+  deviceName: "Bedroom Banksia"
+  deviceId: banksia-bedroom
+
+packages:
+  wifi: !include _wifi.yaml
+
+  banksia:
+    url: https://github.com/cortices/banksia-esphome
+    files:
+# Base processor version
+      - base-esp32c6.yaml
+# Buttons and Display
+      - buttons.yaml
+      - backlight.yaml 
+      - display.yaml
+# Sensors Equipped
+      - ld2420.yaml
+      - bh1750.yaml
+      - bme680.yaml
+      - sgp30.yaml
+````
+
