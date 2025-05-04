@@ -31,18 +31,18 @@ display:
     full_update_every: 60
     update_interval: 5min
     lambda: |-
-      if ("${line_1}" == "time-date") {
+      if (!strcmp("${line_1}", "time-date")) {
         it.strftime(0, 0, id(fira_b32), "%H:%M", id(realtime).now());
         it.strftime(80, 0, id(fira_b32), "%a %d %b", id(realtime).now());
       }
-      if ("${line_2}" == "temp-hum-pres") {
+      if (!strcmp("${line_2}", "temp-hum-pres")) {
 
         it.printf(0, 36, id(fira_24), "%.1f%s", id(temperature).state, id(temperature).get_unit_of_measurement().c_str());
         it.printf(80, 36, id(fira_24), "%.0f%sRH", id(humidity).state, id(humidity).get_unit_of_measurement().c_str());
         it.printf(80+80, 36, id(fira_24), "%.0f%s", id(pressure).state, id(pressure).get_unit_of_measurement().c_str());
       }
 
-      if ("${line_3}" == "co2-tvoc") {
+      if (!strcmp("${line_3}", "co2-tvoc")) {
         it.printf(0, 36+24, id(fira_24), "CO\u2082 %.0f %s", id(co2).state, id(co2).get_unit_of_measurement().c_str());
         it.printf(0, 36+24+24, id(fira_24), "TVOC %.0f %s", id(tvoc).state, id(tvoc).get_unit_of_measurement().c_str());
       }
