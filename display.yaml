@@ -43,7 +43,7 @@ display:
       }
 
       if ("${line_3}" == "co2-tvoc") {
-        it.printf(0, 36+24, id(fira_24), "CO\u2082 %.0f %s", id(eco2).state, id(co2).get_unit_of_measurement().c_str());
+        it.printf(0, 36+24, id(fira_24), "CO\u2082 %.0f %s", id(co2).state, id(co2).get_unit_of_measurement().c_str());
         it.printf(0, 36+24+24, id(fira_24), "TVOC %.0f %s", id(tvoc).state, id(tvoc).get_unit_of_measurement().c_str());
       }
 
