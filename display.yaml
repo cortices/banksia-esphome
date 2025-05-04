@@ -16,11 +16,11 @@ time:
 # Update the display as soon as we have loaded the time, otherwise it says a garbage time for 5 mins.
     on_time_sync: 
       then:
-        - component.update: display 
+        - component.update: epaper 
 
 display:
   - platform: waveshare_epaper 
-    id: display
+    id: epaper
     spi_id: display_spi
     model: "2.13inv3"
     reset_pin: GPIO15
