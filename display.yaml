@@ -14,7 +14,6 @@ time:
   - platform: homeassistant
     id: realtime
 # Update the display as soon as we have loaded the time, otherwise it says a garbage time for 5 mins.
-      if ("${line_2}" == "temp-hum-pres") {
     on_time_sync: 
       then:
         - component.update: display 
