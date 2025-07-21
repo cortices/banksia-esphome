@@ -1,6 +1,6 @@
 substitutions:
-  short_ms_max: 500ms
-  medium_ms_max: 5s
+  short_ms_max: 700ms
+  medium_ms_max: 2s
   long_ms_max: 10s
   release_ms_min: 200ms
 
