@@ -5,6 +5,31 @@ substitutions:
   hold_ms_min: 200ms
   release_ms_min: 200ms
 
+
+event:
+  - platform: template
+    name: "Button $n Trigger"
+    id: button${n}_t
+    device_class: button
+    event_types:
+      - press
+      - press_hold
+      - release
+      - click_short
+      - click_medium
+      - click_long
+      - click_double
+      - repeat
+
+
+sensor:
+  - id: !extend button_adc
+    on_value:
+      - binary_sensor.template.publish:
+          id: button${n}
+          state: !lambda 'return (x > ($adc_v-0.05) && x < ($adc_v+0.05));'
+
+
 binary_sensor:
   - platform: template
     #name: "Button $n"
@@ -59,28 +84,4 @@ binary_sensor:
             id: button${n}_t
             event_type: click_double
         - logger.log: "Button $n double click"
-
-
-
-
-event:
-  - platform: template
-    name: "Button $n Trigger"
-    id: button${n}_t
-    device_class: button
-    event_types:
-      - press
-      - release
-      - click_short
-      - click_medium
-      - click_long
-      - click_double
-      - repeat
-
-sensor:
-  - id: !extend button_adc
-    on_value:
-      - binary_sensor.template.publish:
-          id: button${n}
-          state: !lambda 'return (x > ($adc_v-0.05) && x < ($adc_v+0.05));'
 
