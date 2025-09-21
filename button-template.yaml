@@ -21,6 +21,10 @@ binary_sensor:
     on_multi_click:
       - timing:
         - ON for at least $hold_ms_min
+        then:
+        - event.trigger:
+            id: button${n}_t
+            event_type: press_hold
       - timing:
         - ON for at most $short_ms_max
         - OFF for at least $release_ms_min
