@@ -1,4 +1,4 @@
-defaults:
+substitutions:
   line_1: time-date
   line_2: temp-hum-pres
   line_3: co2-tvoc

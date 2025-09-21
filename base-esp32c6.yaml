@@ -1,4 +1,4 @@
-defaults:
+substitutions:
   loglevel: INFO
 
 # Required to fix ADC on ESP32-C6 with current ESP-IDF v5.3.1

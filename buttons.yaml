@@ -41,3 +41,8 @@ sensor:
     # Unfortunately it's not possible to suppress this from debug logging! 
     #update_interval: 0.1s
     update_interval: 0.05s
+    
+    # Issues with glitches on boot for some people. See https://github.com/cortices/banksia-esphome/issues/2
+    filters:
+       - skip_initial: 40  # 2s at boot
+       - delta: 0.05       # This is a trial to test reduced processing of steady ADC values.
