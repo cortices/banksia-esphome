@@ -15,8 +15,11 @@ esp32:
   variant: esp32c6
   flash_size: 4MB
   framework:
-    version: "5.3.1" 
-    platform_version: "6.9.0" 
+    #version: "5.3.1" 
+    #version: latest
+    #version: "5.4.2"
+    #platform_version: "6.9.0" 
+    #platform_version: latest
     type: esp-idf
 
 # Enable logging
