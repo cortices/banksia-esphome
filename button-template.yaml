@@ -4,6 +4,7 @@ substitutions:
   long_ms_max: 10s
   hold_ms_min: 200ms
   release_ms_min: 200ms
+  adc_plus_minus: 0.08
 
 
 event:
@@ -27,7 +28,7 @@ sensor:
     on_value:
       - binary_sensor.template.publish:
           id: button${n}
-          state: !lambda 'return (x > ($adc_v-0.05) && x < ($adc_v+0.05));'
+          state: !lambda 'return (x >= ($adc_v-$adc_plus_minus) && x <= ($adc_v+$adc_plus_minus));'
 
 
 binary_sensor:
