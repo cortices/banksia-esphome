@@ -1,11 +1,6 @@
 substitutions:
   loglevel: INFO
 
-# Required to fix ADC on ESP32-C6 with current ESP-IDF v5.3.1
-external_components:
-  - source: github://pr#7942
-    components: [ "adc" ]
-
 esphome:
   name: $deviceId
   friendly_name: $deviceName
@@ -15,11 +10,6 @@ esp32:
   variant: esp32c6
   flash_size: 4MB
   framework:
-    #version: "5.3.1" 
-    #version: latest
-    #version: "5.4.2"
-    #platform_version: "6.9.0" 
-    #platform_version: latest
     type: esp-idf
 
 # Enable logging
@@ -34,4 +24,4 @@ i2c:
   sda: GPIO1
   #frequency: 50kHz
   #timeout: 10ms
-  scan: false   # scan true = crashes on ESP_IDF v5.2 and newer due to I2C library version funkiness https://github.com/esphome/esphome/discussions/6957
+  #scan: false   # scan true = crashes on ESP_IDF v5.2 and newer due to I2C library version funkiness https://github.com/esphome/esphome/discussions/6957

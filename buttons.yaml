@@ -45,4 +45,4 @@ sensor:
     # Issues with glitches on boot for some people. See https://github.com/cortices/banksia-esphome/issues/2
     filters:
        - skip_initial: 40  # 2s at boot
-       - delta: 0.05       # This is a trial to test reduced processing of steady ADC values.
+       - delta: 0.05       # Reduced processing of steady ADC values.
